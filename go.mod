@@ -1,4 +1,4 @@
-module github.com/go-redis/redismock/v9
+module github.com/mrrsm/redismock/v9
 
 go 1.18
 
@@ -20,3 +20,5 @@ require (
 	gopkg.in/tomb.v1 v1.0.0-20141024135613-dd632973f1e7 // indirect
 	gopkg.in/yaml.v3 v3.0.1 // indirect
 )
+
+replace github.com/go-redis/redismock/v9 => github.com/mrrsm/redismock/v9 v9.2.0
