@@ -76,6 +76,7 @@ func (cmd *ExpectedStatusCmd) inflow(c redis.Cmder) {
 }
 
 func (cmd *ExpectedStatusCmd) SetVal(val string) {
+	cmd.setVal = true
 	cmd.val = val
 }
 
@@ -106,6 +107,7 @@ func (cmd *ExpectedIntCmd) inflow(c redis.Cmder) {
 }
 
 func (cmd *ExpectedIntCmd) SetVal(val int64) {
+	cmd.setVal = true
 	cmd.val = val
 }
 
@@ -140,6 +142,7 @@ func (cmd *ExpectedIntPointerSliceCmd) String() string {
 }
 
 func (cmd *ExpectedIntPointerSliceCmd) SetVal(val []*int64) {
+	cmd.setVal = true
 	cmd.val = val
 }
 
@@ -167,6 +170,7 @@ func (cmd *ExpectedJSONCmd) String() string {
 }
 
 func (cmd *ExpectedJSONCmd) SetVal(val string) {
+	cmd.setVal = true
 	cmd.val = val
 }
 
@@ -214,6 +218,7 @@ func (cmd *ExpectedJSONSliceCmd) String() string {
 }
 
 func (cmd *ExpectedJSONSliceCmd) SetVal(val []interface{}) {
+	cmd.setVal = true
 	cmd.val = val
 }
 
@@ -236,6 +241,7 @@ func (cmd *ExpectedStringSliceCmd) inflow(c redis.Cmder) {
 }
 
 func (cmd *ExpectedStringSliceCmd) SetVal(val []string) {
+	cmd.setVal = true
 	cmd.val = val
 }
 
@@ -266,6 +272,7 @@ func (cmd *ExpectedSliceCmd) inflow(c redis.Cmder) {
 }
 
 func (cmd *ExpectedSliceCmd) SetVal(val []interface{}) {
+	cmd.setVal = true
 	cmd.val = val
 }
 
