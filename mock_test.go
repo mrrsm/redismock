@@ -1743,6 +1743,38 @@ func operationMapStringInterfaceCmd(base baseMock, expected func() *ExpectedMapS
 	}))
 }
 
+func operationMapMapStringInterfaceCmd(base baseMock, expected func() *ExpectedMapMapStringInterface, actual func() *redis.MapMapStringInterfaceCmd) {
+	var (
+		setErr = errors.New("map map string interface cmd error")
+		val    map[string]interface{}
+		err    error
+	)
+
+	base.ClearExpect()
+	expected().SetErr(setErr)
+	val, err = actual().Result()
+	Expect(err).To(Equal(setErr))
+	Expect(val).To(Equal(map[string]interface{}(nil)))
+
+	base.ClearExpect()
+	expected()
+	val, err = actual().Result()
+	Expect(err).To(HaveOccurred())
+	Expect(val).To(Equal(map[string]interface{}(nil)))
+
+	base.ClearExpect()
+	expected().SetVal(map[string]interface{}{
+		"key1": "val1",
+		"key2": 2,
+	})
+	val, err = actual().Result()
+	Expect(err).NotTo(HaveOccurred())
+	Expect(val).To(Equal(map[string]interface{}{
+		"key1": "val1",
+		"key2": 2,
+	}))
+}
+
 func operationTSTimestampValueSliceCmd(base baseMock, expected func() *ExpectedTSTimestampValueSlice, actual func() *redis.TSTimestampValueSliceCmd) {
 	var (
 		setErr = errors.New("ts timestamp value slice cmd error")
@@ -1810,57 +1842,4 @@ func operationMapStringSliceInterfaceCmd(base baseMock, expected func() *Expecte
 		"key1": {"val1", 1},
 		"key2": {"val2", 2},
 	}))
-}
-
-func operationJSONCmd(base baseMock, expected func() *ExpectedJSON, actual func() *redis.JSONCmd) {
-	var (
-		setErr = errors.New("JSON cmd error")
-		val    string
-		err    error
-	)
-
-	base.ClearExpect()
-	expected().SetErr(setErr)
-	val, err = actual().Result()
-	Expect(err).To(Equal(setErr))
-	Expect(val).To(Equal(""))
-
-	base.ClearExpect()
-	expected()
-	val, err = actual().Result()
-	Expect(err).To(HaveOccurred())
-	Expect(val).To(Equal(""))
-
-	base.ClearExpect()
-	expected().SetVal("test")
-	val, err = actual().Result()
-	Expect(err).NotTo(HaveOccurred())
-	Expect(val).To(Equal("test"))
-}
-
-func operationJSONSliceCmd(base baseMock, expected func() *ExpectedJSONSlice, actual func() *redis.JSONSliceCmd) {
-	// func operationStringSliceCmd(base baseMock, expected func() *ExpectedStringSlice, actual func() *redis.StringSliceCmd) {
-	var (
-		setErr = errors.New("string slice cmd error")
-		val    []interface{}
-		err    error
-	)
-
-	base.ClearExpect()
-	expected().SetErr(setErr)
-	val, err = actual().Result()
-	Expect(err).To(Equal(setErr))
-	Expect(val).To(Equal([]interface{}(nil)))
-
-	base.ClearExpect()
-	expected()
-	val, err = actual().Result()
-	Expect(err).To(HaveOccurred())
-	Expect(val).To(Equal([]interface{}(nil)))
-
-	base.ClearExpect()
-	expected().SetVal([]interface{}{"redis", "mock"})
-	val, err = actual().Result()
-	Expect(err).NotTo(HaveOccurred())
-	Expect(val).To(Equal([]interface{}{"redis", "mock"}))
 }

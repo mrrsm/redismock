@@ -9,15 +9,15 @@ func (m *mock) ExpectFT_List() *ExpectedStringSlice {
 	return e
 }
 
-func (m *mock) ExpectFTAggregate(index string, query string) *ExpectedMapStringInterfaceCmd {
-	e := &ExpectedMapStringInterfaceCmd{}
+func (m *mock) ExpectFTAggregate(index string, query string) *ExpectedMapStringInterface {
+	e := &ExpectedMapStringInterface{}
 	e.cmd = m.factory.FTAggregate(m.ctx, index, query)
 	m.pushExpect(e)
 	return e
 }
 
-func (m *mock) ExpectFTAggregateWithArgs(index string, query string, options *redis.FTAggregateOptions) *ExpectedAggregateCmd {
-	e := &ExpectedAggregateCmd{}
+func (m *mock) ExpectFTAggregateWithArgs(index string, query string, options *redis.FTAggregateOptions) *ExpectedAggregate {
+	e := &ExpectedAggregate{}
 	e.cmd = m.factory.FTAggregateWithArgs(m.ctx, index, query, options)
 	m.pushExpect(e)
 	return e
@@ -51,8 +51,8 @@ func (m *mock) ExpectFTAlter(index string, skipInitialScan bool, definition []in
 	return e
 }
 
-func (m *mock) ExpectFTConfigGet(option string) *ExpectedMapMapStringInterfaceCmd {
-	e := &ExpectedMapMapStringInterfaceCmd{}
+func (m *mock) ExpectFTConfigGet(option string) *ExpectedMapMapStringInterface {
+	e := &ExpectedMapMapStringInterface{}
 	e.cmd = m.factory.FTConfigGet(m.ctx, option)
 	m.pushExpect(e)
 	return e
@@ -79,8 +79,8 @@ func (m *mock) ExpectFTCursorDel(index string, cursorId int) *ExpectedStatus {
 	return e
 }
 
-func (m *mock) ExpectFTCursorRead(index string, cursorId int, count int) *ExpectedMapStringInterfaceCmd {
-	e := &ExpectedMapStringInterfaceCmd{}
+func (m *mock) ExpectFTCursorRead(index string, cursorId int, count int) *ExpectedMapStringInterface {
+	e := &ExpectedMapStringInterface{}
 	e.cmd = m.factory.FTCursorRead(m.ctx, index, cursorId, count)
 	m.pushExpect(e)
 	return e
@@ -88,14 +88,14 @@ func (m *mock) ExpectFTCursorRead(index string, cursorId int, count int) *Expect
 
 func (m *mock) ExpectFTDictAdd(dict string, term ...interface{}) *ExpectedInt {
 	e := &ExpectedInt{}
-	e.cmd = m.factory.FTDictAdd(m.ctx, dict, term)
+	e.cmd = m.factory.FTDictAdd(m.ctx, dict, term...)
 	m.pushExpect(e)
 	return e
 }
 
 func (m *mock) ExpectFTDictDel(dict string, term ...interface{}) *ExpectedInt {
 	e := &ExpectedInt{}
-	e.cmd = m.factory.FTDictDel(m.ctx, dict, term)
+	e.cmd = m.factory.FTDictDel(m.ctx, dict, term...)
 	m.pushExpect(e)
 	return e
 }
@@ -121,57 +121,57 @@ func (m *mock) ExpectFTDropIndexWithArgs(index string, options *redis.FTDropInde
 	return e
 }
 
-func (m *mock) ExpectFTExplain(index string, query string) *ExpectedStringCmd {
-	e := &ExpectedStringCmd{}
+func (m *mock) ExpectFTExplain(index string, query string) *ExpectedString {
+	e := &ExpectedString{}
 	e.cmd = m.factory.FTExplain(m.ctx, index, query)
 	m.pushExpect(e)
 	return e
 }
 
-func (m *mock) ExpectFTExplainWithArgs(index string, query string, options *redis.FTExplainOptions) *ExpectedStringCmd {
-	e := &ExpectedStringCmd{}
+func (m *mock) ExpectFTExplainWithArgs(index string, query string, options *redis.FTExplainOptions) *ExpectedString {
+	e := &ExpectedString{}
 	e.cmd = m.factory.FTExplainWithArgs(m.ctx, index, query, options)
 	m.pushExpect(e)
 	return e
 }
 
-func (m *mock) ExpectFTInfo(index string) *ExpectedFTInfoCmd {
-	e := &ExpectedFTInfoCmd{}
+func (m *mock) ExpectFTInfo(index string) *ExpectedFTInfo {
+	e := &ExpectedFTInfo{}
 	e.cmd = m.factory.FTInfo(m.ctx, index)
 	m.pushExpect(e)
 	return e
 }
 
-func (m *mock) ExpectFTSpellCheck(index string, query string) *ExpectedFTSpellCheckCmd {
-	e := &ExpectedFTSpellCheckCmd{}
+func (m *mock) ExpectFTSpellCheck(index string, query string) *ExpectedFTSpellCheck {
+	e := &ExpectedFTSpellCheck{}
 	e.cmd = m.factory.FTSpellCheck(m.ctx, index, query)
 	m.pushExpect(e)
 	return e
 }
 
-func (m *mock) ExpectFTSpellCheckWithArgs(index string, query string, options *redis.FTSpellCheckOptions) *ExpectedFTSpellCheckCmd {
-	e := &ExpectedFTSpellCheckCmd{}
+func (m *mock) ExpectFTSpellCheckWithArgs(index string, query string, options *redis.FTSpellCheckOptions) *ExpectedFTSpellCheck {
+	e := &ExpectedFTSpellCheck{}
 	e.cmd = m.factory.FTSpellCheckWithArgs(m.ctx, index, query, options)
 	m.pushExpect(e)
 	return e
 }
 
-func (m *mock) ExpectFTSearch(index string, query string) *ExpectedFTSearchCmd {
-	e := &ExpectedFTSearchCmd{}
+func (m *mock) ExpectFTSearch(index string, query string) *ExpectedFTSearch {
+	e := &ExpectedFTSearch{}
 	e.cmd = m.factory.FTSearch(m.ctx, index, query)
 	m.pushExpect(e)
 	return e
 }
 
-func (m *mock) ExpectFTSearchWithArgs(index string, query string, options *redis.FTSearchOptions) *ExpectedFTSearchCmd {
-	e := &ExpectedFTSearchCmd{}
+func (m *mock) ExpectFTSearchWithArgs(index string, query string, options *redis.FTSearchOptions) *ExpectedFTSearch {
+	e := &ExpectedFTSearch{}
 	e.cmd = m.factory.FTSearchWithArgs(m.ctx, index, query, options)
 	m.pushExpect(e)
 	return e
 }
 
-func (m *mock) ExpectFTSynDump(index string) *ExpectedFTSynDumpCmd {
-	e := &ExpectedFTSynDumpCmd{}
+func (m *mock) ExpectFTSynDump(index string) *ExpectedFTSynDump {
+	e := &ExpectedFTSynDump{}
 	e.cmd = m.factory.FTSynDump(m.ctx, index)
 	m.pushExpect(e)
 	return e

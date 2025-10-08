@@ -85,14 +85,9 @@ var _ = Describe("JSONCommands", func() {
 			})
 		})
 
-		// This is a panic in the go-redis library
-		// It("ExpectJSONDebugMemory", func() {
-		// 	operationIntCmd(clientMock, func() *ExpectedInt {
-		// 		return clientMock.ExpectJSONDebugMemory("key", "path")
-		// 	}, func() *redis.IntCmd {
-		// 		return client.JSONDebugMemory(ctx, "key", "path")
-		// 	})
-		// })
+		It("ExpectJSONDebugMemory", func() {
+			Skip("ExpectJSONDebugMemory just panics")
+		})
 
 		It("ExpectJSONDel", func() {
 			operationIntCmd(clientMock, func() *ExpectedInt {

@@ -424,30 +424,30 @@ type baseMock interface {
 	ExpectJSONType(key, path string) *ExpectedJSONSlice
 
 	ExpectFT_List() *ExpectedStringSlice
-	ExpectFTAggregate(index string, query string) *ExpectedMapStringInterfaceCmd
-	ExpectFTAggregateWithArgs(index string, query string, options *redis.FTAggregateOptions) *ExpectedAggregateCmd
+	ExpectFTAggregate(index string, query string) *ExpectedMapStringInterface
+	ExpectFTAggregateWithArgs(index string, query string, options *redis.FTAggregateOptions) *ExpectedAggregate
 	ExpectFTAliasAdd(index string, alias string) *ExpectedStatus
 	ExpectFTAliasDel(alias string) *ExpectedStatus
 	ExpectFTAliasUpdate(index string, alias string) *ExpectedStatus
 	ExpectFTAlter(index string, skipInitialScan bool, definition []interface{}) *ExpectedStatus
-	ExpectFTConfigGet(option string) *ExpectedMapMapStringInterfaceCmd
+	ExpectFTConfigGet(option string) *ExpectedMapMapStringInterface
 	ExpectFTConfigSet(option string, value interface{}) *ExpectedStatus
 	ExpectFTCreate(index string, options *redis.FTCreateOptions, schema ...*redis.FieldSchema) *ExpectedStatus
 	ExpectFTCursorDel(index string, cursorId int) *ExpectedStatus
-	ExpectFTCursorRead(index string, cursorId int, count int) *ExpectedMapStringInterfaceCmd
+	ExpectFTCursorRead(index string, cursorId int, count int) *ExpectedMapStringInterface
 	ExpectFTDictAdd(dict string, term ...interface{}) *ExpectedInt
 	ExpectFTDictDel(dict string, term ...interface{}) *ExpectedInt
 	ExpectFTDictDump(dict string) *ExpectedStringSlice
 	ExpectFTDropIndex(index string) *ExpectedStatus
 	ExpectFTDropIndexWithArgs(index string, options *redis.FTDropIndexOptions) *ExpectedStatus
-	ExpectFTExplain(index string, query string) *ExpectedStringCmd
-	ExpectFTExplainWithArgs(index string, query string, options *redis.FTExplainOptions) *ExpectedStringCmd
-	ExpectFTInfo(index string) *ExpectedFTInfoCmd
-	ExpectFTSpellCheck(index string, query string) *ExpectedFTSpellCheckCmd
-	ExpectFTSpellCheckWithArgs(index string, query string, options *redis.FTSpellCheckOptions) *ExpectedFTSpellCheckCmd
-	ExpectFTSearch(index string, query string) *ExpectedFTSearchCmd
-	ExpectFTSearchWithArgs(index string, query string, options *redis.FTSearchOptions) *ExpectedFTSearchCmd
-	ExpectFTSynDump(index string) *ExpectedFTSynDumpCmd
+	ExpectFTExplain(index string, query string) *ExpectedString
+	ExpectFTExplainWithArgs(index string, query string, options *redis.FTExplainOptions) *ExpectedString
+	ExpectFTInfo(index string) *ExpectedFTInfo
+	ExpectFTSpellCheck(index string, query string) *ExpectedFTSpellCheck
+	ExpectFTSpellCheckWithArgs(index string, query string, options *redis.FTSpellCheckOptions) *ExpectedFTSpellCheck
+	ExpectFTSearch(index string, query string) *ExpectedFTSearch
+	ExpectFTSearchWithArgs(index string, query string, options *redis.FTSearchOptions) *ExpectedFTSearch
+	ExpectFTSynDump(index string) *ExpectedFTSynDump
 	ExpectFTSynUpdate(index string, synGroupId interface{}, terms []interface{}) *ExpectedStatus
 	ExpectFTSynUpdateWithArgs(index string, synGroupId interface{}, options *redis.FTSynUpdateOptions, terms []interface{}) *ExpectedStatus
 	ExpectFTTagVals(index string, field string) *ExpectedStringSlice
