@@ -312,6 +312,32 @@ func operationIntSliceCmd(base baseMock, expected func() *ExpectedIntSlice, actu
 	Expect(val).To(Equal([]int64{1, 2, 3, 4}))
 }
 
+func operationIntPointerSliceCmd(base baseMock, expected func() *ExpectedIntPointerSlice, actual func() *redis.IntPointerSliceCmd) {
+	var (
+		setErr = errors.New("int slice cmd error")
+		val    []*int64
+		err    error
+	)
+
+	base.ClearExpect()
+	expected().SetErr(setErr)
+	val, err = actual().Result()
+	Expect(err).To(Equal(setErr))
+	Expect(val).To(Equal([]*int64(nil)))
+
+	base.ClearExpect()
+	expected()
+	val, err = actual().Result()
+	Expect(err).To(HaveOccurred())
+	Expect(val).To(Equal([]*int64(nil)))
+
+	base.ClearExpect()
+	expected().SetVal([]*int64{})
+	val, err = actual().Result()
+	Expect(err).NotTo(HaveOccurred())
+	Expect(val).To(Equal([]*int64{}))
+}
+
 func operationScanCmd(base baseMock, expected func() *ExpectedScan, actual func() *redis.ScanCmd) {
 	var (
 		setErr = errors.New("scan cmd error")
@@ -1784,4 +1810,57 @@ func operationMapStringSliceInterfaceCmd(base baseMock, expected func() *Expecte
 		"key1": {"val1", 1},
 		"key2": {"val2", 2},
 	}))
+}
+
+func operationJSONCmd(base baseMock, expected func() *ExpectedJSON, actual func() *redis.JSONCmd) {
+	var (
+		setErr = errors.New("JSON cmd error")
+		val    string
+		err    error
+	)
+
+	base.ClearExpect()
+	expected().SetErr(setErr)
+	val, err = actual().Result()
+	Expect(err).To(Equal(setErr))
+	Expect(val).To(Equal(""))
+
+	base.ClearExpect()
+	expected()
+	val, err = actual().Result()
+	Expect(err).To(HaveOccurred())
+	Expect(val).To(Equal(""))
+
+	base.ClearExpect()
+	expected().SetVal("test")
+	val, err = actual().Result()
+	Expect(err).NotTo(HaveOccurred())
+	Expect(val).To(Equal("test"))
+}
+
+func operationJSONSliceCmd(base baseMock, expected func() *ExpectedJSONSlice, actual func() *redis.JSONSliceCmd) {
+	// func operationStringSliceCmd(base baseMock, expected func() *ExpectedStringSlice, actual func() *redis.StringSliceCmd) {
+	var (
+		setErr = errors.New("string slice cmd error")
+		val    []interface{}
+		err    error
+	)
+
+	base.ClearExpect()
+	expected().SetErr(setErr)
+	val, err = actual().Result()
+	Expect(err).To(Equal(setErr))
+	Expect(val).To(Equal([]interface{}(nil)))
+
+	base.ClearExpect()
+	expected()
+	val, err = actual().Result()
+	Expect(err).To(HaveOccurred())
+	Expect(val).To(Equal([]interface{}(nil)))
+
+	base.ClearExpect()
+	expected().SetVal([]interface{}{"redis", "mock"})
+	val, err = actual().Result()
+	Expect(err).NotTo(HaveOccurred())
+	Expect(val).To(Equal([]interface{}{"redis", "mock"}))
 }

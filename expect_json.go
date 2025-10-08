@@ -37,144 +37,54 @@ func (cmd *ExpectedMapMapStringInterfaceCmd) Val() map[string]interface{} {
 	return cmd.val
 }
 
-type ExpectedIntSliceCmd struct {
-	expectedBase
-
-	val []int64
-}
-
-func (cmd *ExpectedIntSliceCmd) SetVal(val []int64) {
-	cmd.setVal = true
-	cmd.val = make([]int64, len(val))
-	copy(cmd.val, val)
-}
-
-func (cmd *ExpectedIntSliceCmd) inflow(c redis.Cmder) {
-	inflow(c, "val", cmd.val)
-}
-
-func (cmd *ExpectedIntSliceCmd) Result() ([]int64, error) {
-	return cmd.val, cmd.err
-}
-
-func (cmd *ExpectedIntSliceCmd) String() string {
-	return cmdString(cmd.cmd, cmd.val)
-}
-
-func (cmd *ExpectedIntSliceCmd) Val() []int64 {
-	return cmd.val
-}
-
-type ExpectedStatusCmd struct {
-	expectedBase
-
-	val string
-}
-
-func (cmd *ExpectedStatusCmd) inflow(c redis.Cmder) {
-	inflow(c, "val", cmd.val)
-}
-
-func (cmd *ExpectedStatusCmd) SetVal(val string) {
-	cmd.setVal = true
-	cmd.val = val
-}
-
-func (cmd *ExpectedStatusCmd) Val() string {
-	return cmd.val
-}
-
-func (cmd *ExpectedStatusCmd) Result() (string, error) {
-	return cmd.val, cmd.err
-}
-
-func (cmd *ExpectedStatusCmd) Bytes() ([]byte, error) {
-	return StringToBytes(cmd.val), cmd.err
-}
-
-func (cmd *ExpectedStatusCmd) String() string {
-	return cmdString(cmd.cmd, cmd.val)
-}
-
-type ExpectedIntCmd struct {
-	expectedBase
-
-	val int64
-}
-
-func (cmd *ExpectedIntCmd) inflow(c redis.Cmder) {
-	inflow(c, "val", cmd.val)
-}
-
-func (cmd *ExpectedIntCmd) SetVal(val int64) {
-	cmd.setVal = true
-	cmd.val = val
-}
-
-func (cmd *ExpectedIntCmd) Val() int64 {
-	return cmd.val
-}
-
-func (cmd *ExpectedIntCmd) Result() (int64, error) {
-	return cmd.val, cmd.err
-}
-
-func (cmd *ExpectedIntCmd) Uint64() (uint64, error) {
-	return uint64(cmd.val), cmd.err
-}
-
-func (cmd *ExpectedIntCmd) String() string {
-	return cmdString(cmd.cmd, cmd.val)
-}
-
-type ExpectedIntPointerSliceCmd struct {
+type ExpectedIntPointerSlice struct {
 	expectedBase
 
 	val []*int64
 }
 
-func (cmd *ExpectedIntPointerSliceCmd) inflow(c redis.Cmder) {
+func (cmd *ExpectedIntPointerSlice) inflow(c redis.Cmder) {
 	inflow(c, "val", cmd.val)
 }
 
-func (cmd *ExpectedIntPointerSliceCmd) String() string {
+func (cmd *ExpectedIntPointerSlice) String() string {
 	return cmdString(cmd.cmd, cmd.val)
 }
 
-func (cmd *ExpectedIntPointerSliceCmd) SetVal(val []*int64) {
+func (cmd *ExpectedIntPointerSlice) SetVal(val []*int64) {
 	cmd.setVal = true
 	cmd.val = val
 }
 
-func (cmd *ExpectedIntPointerSliceCmd) Val() []*int64 {
+func (cmd *ExpectedIntPointerSlice) Val() []*int64 {
 	return cmd.val
 }
 
-func (cmd *ExpectedIntPointerSliceCmd) Result() ([]*int64, error) {
+func (cmd *ExpectedIntPointerSlice) Result() ([]*int64, error) {
 	return cmd.val, cmd.err
 }
 
-type ExpectedJSONCmd struct {
+type ExpectedJSON struct {
 	expectedBase
 
 	val      string
 	expanded interface{}
 }
 
-func (cmd *ExpectedJSONCmd) inflow(c redis.Cmder) {
+func (cmd *ExpectedJSON) inflow(c redis.Cmder) {
 	inflow(c, "val", cmd.val)
 }
 
-func (cmd *ExpectedJSONCmd) String() string {
+func (cmd *ExpectedJSON) String() string {
 	return cmdString(cmd.cmd, cmd.val)
 }
 
-func (cmd *ExpectedJSONCmd) SetVal(val string) {
+func (cmd *ExpectedJSON) SetVal(val string) {
 	cmd.setVal = true
 	cmd.val = val
 }
 
-func (cmd *ExpectedJSONCmd) Val() string {
+func (cmd *ExpectedJSON) Val() string {
 	if len(cmd.val) == 0 && cmd.expanded != nil {
 		val, err := json.Marshal(cmd.expanded)
 		if err != nil {
@@ -188,11 +98,11 @@ func (cmd *ExpectedJSONCmd) Val() string {
 	}
 }
 
-func (cmd *ExpectedJSONCmd) Result() (string, error) {
+func (cmd *ExpectedJSON) Result() (string, error) {
 	return cmd.Val(), cmd.cmd.Err()
 }
 
-func (cmd *ExpectedJSONCmd) Expanded() (interface{}, error) {
+func (cmd *ExpectedJSON) Expanded() (interface{}, error) {
 	if len(cmd.val) != 0 && cmd.expanded == nil {
 		err := json.Unmarshal([]byte(cmd.val), &cmd.expanded)
 		if err != nil {
@@ -203,109 +113,31 @@ func (cmd *ExpectedJSONCmd) Expanded() (interface{}, error) {
 	return cmd.expanded, nil
 }
 
-type ExpectedJSONSliceCmd struct {
+type ExpectedJSONSlice struct {
 	expectedBase
 
 	val []interface{}
 }
 
-func (cmd *ExpectedJSONSliceCmd) inflow(c redis.Cmder) {
+func (cmd *ExpectedJSONSlice) inflow(c redis.Cmder) {
 	inflow(c, "val", cmd.val)
 }
 
-func (cmd *ExpectedJSONSliceCmd) String() string {
+func (cmd *ExpectedJSONSlice) String() string {
 	return cmdString(cmd.cmd, cmd.val)
 }
 
-func (cmd *ExpectedJSONSliceCmd) SetVal(val []interface{}) {
+func (cmd *ExpectedJSONSlice) SetVal(val []interface{}) {
 	cmd.setVal = true
 	cmd.val = val
 }
 
-func (cmd *ExpectedJSONSliceCmd) Val() []interface{} {
+func (cmd *ExpectedJSONSlice) Val() []interface{} {
 	return cmd.val
 }
 
-func (cmd *ExpectedJSONSliceCmd) Result() ([]interface{}, error) {
+func (cmd *ExpectedJSONSlice) Result() ([]interface{}, error) {
 	return cmd.val, cmd.err
-}
-
-type ExpectedStringSliceCmd struct {
-	expectedBase
-
-	val []string
-}
-
-func (cmd *ExpectedStringSliceCmd) inflow(c redis.Cmder) {
-	inflow(c, "val", cmd.val)
-}
-
-func (cmd *ExpectedStringSliceCmd) SetVal(val []string) {
-	cmd.setVal = true
-	cmd.val = val
-}
-
-func (cmd *ExpectedStringSliceCmd) Val() []string {
-	return cmd.val
-}
-
-func (cmd *ExpectedStringSliceCmd) Result() ([]string, error) {
-	return cmd.val, cmd.err
-}
-
-func (cmd *ExpectedStringSliceCmd) String() string {
-	return cmdString(cmd.cmd, cmd.val)
-}
-
-func (cmd *ExpectedStringSliceCmd) ScanSlice(container interface{}) error {
-	return ScanSlice(cmd.Val(), container)
-}
-
-type ExpectedSliceCmd struct {
-	expectedBase
-
-	val []interface{}
-}
-
-func (cmd *ExpectedSliceCmd) inflow(c redis.Cmder) {
-	inflow(c, "val", cmd.val)
-}
-
-func (cmd *ExpectedSliceCmd) SetVal(val []interface{}) {
-	cmd.setVal = true
-	cmd.val = val
-}
-
-func (cmd *ExpectedSliceCmd) Val() []interface{} {
-	return cmd.val
-}
-
-func (cmd *ExpectedSliceCmd) Result() ([]interface{}, error) {
-	return cmd.val, cmd.err
-}
-
-func (cmd *ExpectedSliceCmd) String() string {
-	return cmdString(cmd.cmd, cmd.val)
-}
-
-// Scan scans the results from the map into a destination struct. The map keys
-// are matched in the Redis struct fields by the `redis:"field"` tag.
-func (cmd *ExpectedSliceCmd) Scan(dst interface{}) error {
-	if cmd.err != nil {
-		return cmd.err
-	}
-
-	// Pass the list of keys and values.
-	// Skip the first two args for: HMGET key
-	var args []interface{}
-	if cmd.args()[0] == "hmget" {
-		args = cmd.args()[2:]
-	} else {
-		// Otherwise, it's: MGET field field ...
-		args = cmd.args()[1:]
-	}
-
-	return HScan(dst, args, cmd.val)
 }
 
 type decoderFunc func(reflect.Value, string) error

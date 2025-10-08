@@ -2,8 +2,8 @@ package redismock
 
 import "github.com/redis/go-redis/v9"
 
-func (m *mock) ExpectFT_List() *ExpectedStringSliceCmd {
-	e := &ExpectedStringSliceCmd{}
+func (m *mock) ExpectFT_List() *ExpectedStringSlice {
+	e := &ExpectedStringSlice{}
 	e.cmd = m.factory.FT_List(m.ctx)
 	m.pushExpect(e)
 	return e
@@ -23,29 +23,29 @@ func (m *mock) ExpectFTAggregateWithArgs(index string, query string, options *re
 	return e
 }
 
-func (m *mock) ExpectFTAliasAdd(index string, alias string) *ExpectedStatusCmd {
-	e := &ExpectedStatusCmd{}
+func (m *mock) ExpectFTAliasAdd(index string, alias string) *ExpectedStatus {
+	e := &ExpectedStatus{}
 	e.cmd = m.factory.FTAliasAdd(m.ctx, index, alias)
 	m.pushExpect(e)
 	return e
 }
 
-func (m *mock) ExpectFTAliasDel(alias string) *ExpectedStatusCmd {
-	e := &ExpectedStatusCmd{}
+func (m *mock) ExpectFTAliasDel(alias string) *ExpectedStatus {
+	e := &ExpectedStatus{}
 	e.cmd = m.factory.FTAliasDel(m.ctx, alias)
 	m.pushExpect(e)
 	return e
 }
 
-func (m *mock) ExpectFTAliasUpdate(index string, alias string) *ExpectedStatusCmd {
-	e := &ExpectedStatusCmd{}
+func (m *mock) ExpectFTAliasUpdate(index string, alias string) *ExpectedStatus {
+	e := &ExpectedStatus{}
 	e.cmd = m.factory.FTAliasUpdate(m.ctx, index, alias)
 	m.pushExpect(e)
 	return e
 }
 
-func (m *mock) ExpectFTAlter(index string, skipInitialScan bool, definition []interface{}) *ExpectedStatusCmd {
-	e := &ExpectedStatusCmd{}
+func (m *mock) ExpectFTAlter(index string, skipInitialScan bool, definition []interface{}) *ExpectedStatus {
+	e := &ExpectedStatus{}
 	e.cmd = m.factory.FTAlter(m.ctx, index, skipInitialScan, definition)
 	m.pushExpect(e)
 	return e
@@ -58,22 +58,22 @@ func (m *mock) ExpectFTConfigGet(option string) *ExpectedMapMapStringInterfaceCm
 	return e
 }
 
-func (m *mock) ExpectFTConfigSet(option string, value interface{}) *ExpectedStatusCmd {
-	e := &ExpectedStatusCmd{}
+func (m *mock) ExpectFTConfigSet(option string, value interface{}) *ExpectedStatus {
+	e := &ExpectedStatus{}
 	e.cmd = m.factory.FTConfigSet(m.ctx, option, value)
 	m.pushExpect(e)
 	return e
 }
 
-func (m *mock) ExpectFTCreate(index string, options *redis.FTCreateOptions, schema ...*redis.FieldSchema) *ExpectedStatusCmd {
-	e := &ExpectedStatusCmd{}
+func (m *mock) ExpectFTCreate(index string, options *redis.FTCreateOptions, schema ...*redis.FieldSchema) *ExpectedStatus {
+	e := &ExpectedStatus{}
 	e.cmd = m.factory.FTCreate(m.ctx, index, options, schema...)
 	m.pushExpect(e)
 	return e
 }
 
-func (m *mock) ExpectFTCursorDel(index string, cursorId int) *ExpectedStatusCmd {
-	e := &ExpectedStatusCmd{}
+func (m *mock) ExpectFTCursorDel(index string, cursorId int) *ExpectedStatus {
+	e := &ExpectedStatus{}
 	e.cmd = m.factory.FTCursorDel(m.ctx, index, cursorId)
 	m.pushExpect(e)
 	return e
@@ -86,36 +86,36 @@ func (m *mock) ExpectFTCursorRead(index string, cursorId int, count int) *Expect
 	return e
 }
 
-func (m *mock) ExpectFTDictAdd(dict string, term ...interface{}) *ExpectedIntCmd {
-	e := &ExpectedIntCmd{}
+func (m *mock) ExpectFTDictAdd(dict string, term ...interface{}) *ExpectedInt {
+	e := &ExpectedInt{}
 	e.cmd = m.factory.FTDictAdd(m.ctx, dict, term)
 	m.pushExpect(e)
 	return e
 }
 
-func (m *mock) ExpectFTDictDel(dict string, term ...interface{}) *ExpectedIntCmd {
-	e := &ExpectedIntCmd{}
+func (m *mock) ExpectFTDictDel(dict string, term ...interface{}) *ExpectedInt {
+	e := &ExpectedInt{}
 	e.cmd = m.factory.FTDictDel(m.ctx, dict, term)
 	m.pushExpect(e)
 	return e
 }
 
-func (m *mock) ExpectFTDictDump(dict string) *ExpectedStringSliceCmd {
-	e := &ExpectedStringSliceCmd{}
+func (m *mock) ExpectFTDictDump(dict string) *ExpectedStringSlice {
+	e := &ExpectedStringSlice{}
 	e.cmd = m.factory.FTDictDump(m.ctx, dict)
 	m.pushExpect(e)
 	return e
 }
 
-func (m *mock) ExpectFTDropIndex(index string) *ExpectedStatusCmd {
-	e := &ExpectedStatusCmd{}
+func (m *mock) ExpectFTDropIndex(index string) *ExpectedStatus {
+	e := &ExpectedStatus{}
 	e.cmd = m.factory.FTDropIndex(m.ctx, index)
 	m.pushExpect(e)
 	return e
 }
 
-func (m *mock) ExpectFTDropIndexWithArgs(index string, options *redis.FTDropIndexOptions) *ExpectedStatusCmd {
-	e := &ExpectedStatusCmd{}
+func (m *mock) ExpectFTDropIndexWithArgs(index string, options *redis.FTDropIndexOptions) *ExpectedStatus {
+	e := &ExpectedStatus{}
 	e.cmd = m.factory.FTDropIndexWithArgs(m.ctx, index, options)
 	m.pushExpect(e)
 	return e
@@ -177,22 +177,22 @@ func (m *mock) ExpectFTSynDump(index string) *ExpectedFTSynDumpCmd {
 	return e
 }
 
-func (m *mock) ExpectFTSynUpdate(index string, synGroupId interface{}, terms []interface{}) *ExpectedStatusCmd {
-	e := &ExpectedStatusCmd{}
+func (m *mock) ExpectFTSynUpdate(index string, synGroupId interface{}, terms []interface{}) *ExpectedStatus {
+	e := &ExpectedStatus{}
 	e.cmd = m.factory.FTSynUpdate(m.ctx, index, synGroupId, terms)
 	m.pushExpect(e)
 	return e
 }
 
-func (m *mock) ExpectFTSynUpdateWithArgs(index string, synGroupId interface{}, options *redis.FTSynUpdateOptions, terms []interface{}) *ExpectedStatusCmd {
-	e := &ExpectedStatusCmd{}
+func (m *mock) ExpectFTSynUpdateWithArgs(index string, synGroupId interface{}, options *redis.FTSynUpdateOptions, terms []interface{}) *ExpectedStatus {
+	e := &ExpectedStatus{}
 	e.cmd = m.factory.FTSynUpdateWithArgs(m.ctx, index, synGroupId, options, terms)
 	m.pushExpect(e)
 	return e
 }
 
-func (m *mock) ExpectFTTagVals(index string, field string) *ExpectedStringSliceCmd {
-	e := &ExpectedStringSliceCmd{}
+func (m *mock) ExpectFTTagVals(index string, field string) *ExpectedStringSlice {
+	e := &ExpectedStringSlice{}
 	e.cmd = m.factory.FTTagVals(m.ctx, index, field)
 	m.pushExpect(e)
 	return e

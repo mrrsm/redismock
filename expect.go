@@ -395,51 +395,51 @@ type baseMock interface {
 	ExpectTSMGet(filters []string) *ExpectedMapStringSliceInterface
 	ExpectTSMGetWithArgs(filters []string, options *redis.TSMGetOptions) *ExpectedMapStringSliceInterface
 
-	ExpectJSONArrAppend(key, path string, values ...interface{}) *ExpectedIntSliceCmd
-	ExpectJSONArrIndex(key, path string, value ...interface{}) *ExpectedIntSliceCmd
-	ExpectJSONArrIndexWithArgs(key, path string, options *redis.JSONArrIndexArgs, value ...interface{}) *ExpectedIntSliceCmd
-	ExpectJSONArrInsert(key, path string, index int64, values ...interface{}) *ExpectedIntSliceCmd
-	ExpectJSONArrLen(key, path string) *ExpectedIntSliceCmd
-	ExpectJSONArrPop(key, path string, index int) *ExpectedStringSliceCmd
-	ExpectJSONArrTrim(key, path string) *ExpectedIntSliceCmd
-	ExpectJSONArrTrimWithArgs(key, path string, options *redis.JSONArrTrimArgs) *ExpectedIntSliceCmd
-	ExpectJSONClear(key, path string) *ExpectedIntCmd
-	ExpectJSONDebugMemory(key, path string) *ExpectedIntCmd
-	ExpectJSONDel(key, path string) *ExpectedIntCmd
-	ExpectJSONForget(key, path string) *ExpectedIntCmd
-	ExpectJSONGet(key string, paths ...string) *ExpectedJSONCmd
-	ExpectJSONGetWithArgs(key string, options *redis.JSONGetArgs, paths ...string) *ExpectedJSONCmd
-	ExpectJSONMerge(key, path string, value string) *ExpectedStatusCmd
-	ExpectJSONMSetArgs(docs []redis.JSONSetArgs) *ExpectedStatusCmd
-	ExpectJSONMSet(params ...interface{}) *ExpectedStatusCmd
-	ExpectJSONMGet(path string, keys ...string) *ExpectedJSONSliceCmd
-	ExpectJSONNumIncrBy(key, path string, value float64) *ExpectedJSONCmd
-	ExpectJSONObjKeys(key, path string) *ExpectedSliceCmd
-	ExpectJSONObjLen(key, path string) *ExpectedIntPointerSliceCmd
-	ExpectJSONSet(key, path string, value interface{}) *ExpectedStatusCmd
-	ExpectJSONSetMode(key, path string, value interface{}, mode string) *ExpectedStatusCmd
-	ExpectJSONStrAppend(key, path, value string) *ExpectedIntPointerSliceCmd
-	ExpectJSONStrLen(key, path string) *ExpectedIntPointerSliceCmd
-	ExpectJSONToggle(key, path string) *ExpectedIntPointerSliceCmd
-	ExpectJSONType(key, path string) *ExpectedJSONSliceCmd
+	ExpectJSONArrAppend(key, path string, values ...interface{}) *ExpectedIntSlice
+	ExpectJSONArrIndex(key, path string, value ...interface{}) *ExpectedIntSlice
+	ExpectJSONArrIndexWithArgs(key, path string, options *redis.JSONArrIndexArgs, value ...interface{}) *ExpectedIntSlice
+	ExpectJSONArrInsert(key, path string, index int64, values ...interface{}) *ExpectedIntSlice
+	ExpectJSONArrLen(key, path string) *ExpectedIntSlice
+	ExpectJSONArrPop(key, path string, index int) *ExpectedStringSlice
+	ExpectJSONArrTrim(key, path string) *ExpectedIntSlice
+	ExpectJSONArrTrimWithArgs(key, path string, options *redis.JSONArrTrimArgs) *ExpectedIntSlice
+	ExpectJSONClear(key, path string) *ExpectedInt
+	ExpectJSONDebugMemory(key, path string) *ExpectedInt
+	ExpectJSONDel(key, path string) *ExpectedInt
+	ExpectJSONForget(key, path string) *ExpectedInt
+	ExpectJSONGet(key string, paths ...string) *ExpectedJSON
+	ExpectJSONGetWithArgs(key string, options *redis.JSONGetArgs, paths ...string) *ExpectedJSON
+	ExpectJSONMerge(key, path string, value string) *ExpectedStatus
+	ExpectJSONMSetArgs(docs []redis.JSONSetArgs) *ExpectedStatus
+	ExpectJSONMSet(params ...interface{}) *ExpectedStatus
+	ExpectJSONMGet(path string, keys ...string) *ExpectedJSONSlice
+	ExpectJSONNumIncrBy(key, path string, value float64) *ExpectedJSON
+	ExpectJSONObjKeys(key, path string) *ExpectedSlice
+	ExpectJSONObjLen(key, path string) *ExpectedIntPointerSlice
+	ExpectJSONSet(key, path string, value interface{}) *ExpectedStatus
+	ExpectJSONSetMode(key, path string, value interface{}, mode string) *ExpectedStatus
+	ExpectJSONStrAppend(key, path, value string) *ExpectedIntPointerSlice
+	ExpectJSONStrLen(key, path string) *ExpectedIntPointerSlice
+	ExpectJSONToggle(key, path string) *ExpectedIntPointerSlice
+	ExpectJSONType(key, path string) *ExpectedJSONSlice
 
-	ExpectFT_List() *ExpectedStringSliceCmd
+	ExpectFT_List() *ExpectedStringSlice
 	ExpectFTAggregate(index string, query string) *ExpectedMapStringInterfaceCmd
 	ExpectFTAggregateWithArgs(index string, query string, options *redis.FTAggregateOptions) *ExpectedAggregateCmd
-	ExpectFTAliasAdd(index string, alias string) *ExpectedStatusCmd
-	ExpectFTAliasDel(alias string) *ExpectedStatusCmd
-	ExpectFTAliasUpdate(index string, alias string) *ExpectedStatusCmd
-	ExpectFTAlter(index string, skipInitialScan bool, definition []interface{}) *ExpectedStatusCmd
+	ExpectFTAliasAdd(index string, alias string) *ExpectedStatus
+	ExpectFTAliasDel(alias string) *ExpectedStatus
+	ExpectFTAliasUpdate(index string, alias string) *ExpectedStatus
+	ExpectFTAlter(index string, skipInitialScan bool, definition []interface{}) *ExpectedStatus
 	ExpectFTConfigGet(option string) *ExpectedMapMapStringInterfaceCmd
-	ExpectFTConfigSet(option string, value interface{}) *ExpectedStatusCmd
-	ExpectFTCreate(index string, options *redis.FTCreateOptions, schema ...*redis.FieldSchema) *ExpectedStatusCmd
-	ExpectFTCursorDel(index string, cursorId int) *ExpectedStatusCmd
+	ExpectFTConfigSet(option string, value interface{}) *ExpectedStatus
+	ExpectFTCreate(index string, options *redis.FTCreateOptions, schema ...*redis.FieldSchema) *ExpectedStatus
+	ExpectFTCursorDel(index string, cursorId int) *ExpectedStatus
 	ExpectFTCursorRead(index string, cursorId int, count int) *ExpectedMapStringInterfaceCmd
-	ExpectFTDictAdd(dict string, term ...interface{}) *ExpectedIntCmd
-	ExpectFTDictDel(dict string, term ...interface{}) *ExpectedIntCmd
-	ExpectFTDictDump(dict string) *ExpectedStringSliceCmd
-	ExpectFTDropIndex(index string) *ExpectedStatusCmd
-	ExpectFTDropIndexWithArgs(index string, options *redis.FTDropIndexOptions) *ExpectedStatusCmd
+	ExpectFTDictAdd(dict string, term ...interface{}) *ExpectedInt
+	ExpectFTDictDel(dict string, term ...interface{}) *ExpectedInt
+	ExpectFTDictDump(dict string) *ExpectedStringSlice
+	ExpectFTDropIndex(index string) *ExpectedStatus
+	ExpectFTDropIndexWithArgs(index string, options *redis.FTDropIndexOptions) *ExpectedStatus
 	ExpectFTExplain(index string, query string) *ExpectedStringCmd
 	ExpectFTExplainWithArgs(index string, query string, options *redis.FTExplainOptions) *ExpectedStringCmd
 	ExpectFTInfo(index string) *ExpectedFTInfoCmd
@@ -448,9 +448,9 @@ type baseMock interface {
 	ExpectFTSearch(index string, query string) *ExpectedFTSearchCmd
 	ExpectFTSearchWithArgs(index string, query string, options *redis.FTSearchOptions) *ExpectedFTSearchCmd
 	ExpectFTSynDump(index string) *ExpectedFTSynDumpCmd
-	ExpectFTSynUpdate(index string, synGroupId interface{}, terms []interface{}) *ExpectedStatusCmd
-	ExpectFTSynUpdateWithArgs(index string, synGroupId interface{}, options *redis.FTSynUpdateOptions, terms []interface{}) *ExpectedStatusCmd
-	ExpectFTTagVals(index string, field string) *ExpectedStringSliceCmd
+	ExpectFTSynUpdate(index string, synGroupId interface{}, terms []interface{}) *ExpectedStatus
+	ExpectFTSynUpdateWithArgs(index string, synGroupId interface{}, options *redis.FTSynUpdateOptions, terms []interface{}) *ExpectedStatus
+	ExpectFTTagVals(index string, field string) *ExpectedStringSlice
 }
 
 type pipelineMock interface {
