@@ -404,7 +404,7 @@ type baseMock interface {
 	ExpectJSONArrTrim(key, path string) *ExpectedIntSlice
 	ExpectJSONArrTrimWithArgs(key, path string, options *redis.JSONArrTrimArgs) *ExpectedIntSlice
 	ExpectJSONClear(key, path string) *ExpectedInt
-	ExpectJSONDebugMemory(key, path string) *ExpectedInt
+	// ExpectJSONDebugMemory(key, path string) *ExpectedInt // This just panics in the go-redis code
 	ExpectJSONDel(key, path string) *ExpectedInt
 	ExpectJSONForget(key, path string) *ExpectedInt
 	ExpectJSONGet(key string, paths ...string) *ExpectedJSON

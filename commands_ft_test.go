@@ -29,7 +29,6 @@ var _ = Describe("FTCommands", func() {
 			})
 		})
 
-		// ExpectFTAggregateWithArgs(index string, query string, options *redis.FTAggregateOptions) *ExpectedAggregate
 		It("ExpectFTAggregateWithArgs", func() {
 			operationAggregateCmd(clientMock, func() *ExpectedAggregate {
 				return clientMock.ExpectFTAggregateWithArgs("index", "query", &redis.FTAggregateOptions{})

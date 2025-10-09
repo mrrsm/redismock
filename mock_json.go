@@ -65,13 +65,6 @@ func (m *mock) ExpectJSONClear(key, path string) *ExpectedInt {
 	return e
 }
 
-func (m *mock) ExpectJSONDebugMemory(key, path string) *ExpectedInt {
-	e := &ExpectedInt{}
-	e.cmd = m.factory.JSONDebugMemory(m.ctx, key, path)
-	m.pushExpect(e)
-	return e
-}
-
 func (m *mock) ExpectJSONDel(key, path string) *ExpectedInt {
 	e := &ExpectedInt{}
 	e.cmd = m.factory.JSONDel(m.ctx, key, path)
